@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore *-test.js",
     "build:commonjs": "babel src --out-dir lib --ignore *-test.js",
@@ -20,6 +21,7 @@
     "test:watch": "npm run test -- --watch src/**/*-test.js"
   },
   "files": [
+    "index.d.ts",
     "es",
     "lib",
     "dist"

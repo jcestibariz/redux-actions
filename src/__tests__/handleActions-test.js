@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { handleActions, createAction, createActions, combineActions } from '../';
+import { handleActions, createAction, createActions, combineActions, createHandler } from '../';
 
 describe('handleActions', () => {
   const defaultState = { counter: 0 };
@@ -174,6 +174,29 @@ describe('handleActions', () => {
         counter: counter - payload
       })
     }, defaultState);
+
+    expect(reducer({ counter: 3 }, increment(2)))
+      .to.deep.equal({
+        counter: 5
+      });
+    expect(reducer({ counter: 10 }, decrement(3)))
+      .to.deep.equal({
+        counter: 7
+      });
+  });
+
+  it('should work with handlers passed as array', () => {
+    const { increment, decrement } = createActions('INCREMENT', 'DECREMENT');
+
+    const reducer = handleActions([
+      createHandler(increment, ({ counter }, { payload }) => ({
+        counter: counter + payload
+      })),
+
+      createHandler(decrement, ({ counter }, { payload }) => ({
+        counter: counter - payload
+      }))
+    ], defaultState);
 
     expect(reducer({ counter: 3 }, increment(2)))
       .to.deep.equal({
