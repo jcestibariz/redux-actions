@@ -19,7 +19,7 @@ export interface ActionTag<P> {
 }
 
 export interface ActionCreator<A, P> extends ActionTag<P> {
-  (arg: A): FluxAction<P>
+  (arg?: A): FluxAction<P>
 }
 
 export interface Reducer<S, P> {
